@@ -12,6 +12,8 @@ spring:
       username: root
       password: 1234
 
-mybatis:
+mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.luop.entity    #所有entity别名类所在包
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl    #打印日志到控制台

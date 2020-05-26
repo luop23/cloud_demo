@@ -13,6 +13,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.luop</groupId>
+            <artifactId>cloud_api_commons</artifactId>
+            <version>${project.version}</version>
+            <!--<scope>compile</scope>-->
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
