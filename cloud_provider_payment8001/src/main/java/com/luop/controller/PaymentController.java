@@ -4,6 +4,7 @@ import com.luop.entity.CommonResult;
 import com.luop.entity.Payment;
 import com.luop.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,6 +23,9 @@ public class PaymentController {
 
     @Resource
     private PaymentService paymentService;
+
+    @Value("${server.port}")
+    private String port;
 
     @PostMapping
     public CommonResult create(@RequestBody Payment payment) {
@@ -46,8 +50,13 @@ public class PaymentController {
     }
 
     @GetMapping
-    public CommonResult getAll(){
+    public CommonResult getAll() {
         List<Payment> payments = paymentService.list();
-        return new CommonResult(200,"查询数据成功",payments);
+        return new CommonResult(200, "查询数据成功", payments);
+    }
+
+    @GetMapping("/port")
+    public CommonResult getPort() {
+        return new CommonResult(200, "数据查询成功", port);
     }
 }
