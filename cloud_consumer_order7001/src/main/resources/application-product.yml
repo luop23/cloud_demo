@@ -1,0 +1,48 @@
+#server:
+#  port: 7070
+#
+#spring:
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource    #当前数据源操作类型
+#    druid:
+#      driver-class-name: com.mysql.jdbc.Driver
+#      url: jdbc:mysql://127.0.0.1:3306/cloud_demo?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+#      username: root
+#      password: 1234
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 127.0.0.1:8848   #nacos地址
+#
+##监控
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#
+##ribbon配置
+##设置Feign客户端超时时间（openfeign默认支持ribbon）
+##ribbon:
+##  ReadTimeout: 5000   #建立连接所用时间，单位毫秒
+##  ConnectTimeout: 5000   #建立连接后从服务器读取到可用资源所用的时间，单位毫秒
+#
+##配置ribbon负载均衡策略
+#cloud-payment-service:    #服务提供方的服务名
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule   #随机策略,默认为轮询策略
+#
+##设置Feign客户端超时时间（openfeign默认支持ribbon）
+#feign:
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 5000  #建立连接所用时间，单位毫秒
+#        readTimeout: 5000   #建立连接后从服务器读取到可用资源所用的时间，单位毫秒
+#
+##日志配置
+#logging:
+#  level:
+#    com.alibaba.nacos.client.naming: error    #关闭nacos定时检测
+#    com.luop.service.PaymentFeignService: debug   #开启指定服务feign日志
+##    com.luop.service: debug   #开启指定包下feign日志

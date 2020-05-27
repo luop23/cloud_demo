@@ -12,6 +12,12 @@
     <artifactId>cloud_provider_payment8001</artifactId>
 
     <dependencies>
+        <!--openfeign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>2.1.2.RELEASE</version>
+        </dependency>
         <!--springCloud alibaba nacos-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

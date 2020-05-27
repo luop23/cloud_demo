@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: luoping
@@ -57,6 +58,16 @@ public class PaymentController {
 
     @GetMapping("/port")
     public CommonResult getPort() {
+        return new CommonResult(200, "数据查询成功", port);
+    }
+
+    @GetMapping("/timeout")
+    public CommonResult getFeignTimeout() {
+        try {
+            TimeUnit.SECONDS.sleep(3);   //模拟feign超时
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new CommonResult(200, "数据查询成功", port);
     }
 }
