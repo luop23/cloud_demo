@@ -13,6 +13,7 @@
         <module>cloud_provider_payment8001</module>
         <module>cloud_api_commons</module>
         <module>cloud_consumer_order7001</module>
+        <module>cloud_consumer_sentinel6001</module>
     </modules>
 
     <!--统一管理jar包版本-->

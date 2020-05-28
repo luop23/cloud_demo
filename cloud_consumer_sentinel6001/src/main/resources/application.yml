@@ -1,9 +1,9 @@
 server:
-  port: 8001
+  port: 6001
 
 spring:
   application:
-    name: cloud-payment-service
+    name: cloud-sentinel-service
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource    #当前数据源操作类型
     druid:
@@ -16,6 +16,10 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848   #nacos地址
 #        server-addr: 192.168.5.3:8009   #nginx地址
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:9527   #配置sentinel dashboard地址  自定义sentinel-dashboard端口
+        port: 8719
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
@@ -34,3 +38,17 @@ management:
 logging:
   level:
     com.alibaba.nacos.client.naming: error    #关闭nacos定时检测
+    com.luop.service: debug   #开启指定包下feign日志
+
+#配置ribbon负载均衡策略
+cloud-payment-service:    #服务提供方的服务名
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule   #随机策略,默认为轮询策略
+
+#设置Feign客户端超时时间（openfeign默认支持ribbon）
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000  #建立连接所用时间，单位毫秒
+        readTimeout: 5000   #建立连接后从服务器读取到可用资源所用的时间，单位毫秒
