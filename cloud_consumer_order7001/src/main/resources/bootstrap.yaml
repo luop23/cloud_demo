@@ -1,13 +1,18 @@
+##nacos 配置中心必须要有bootstrap.yml文件，因为nacos是从bootstrap.yml开始加载的
 spring:
   application:
     name: cloud-order-service
   profiles:
-    active: dev
+    active: product
   cloud:
     nacos:
       config:
-        server-addr: 127.0.0.1:8848    #nacos作为配置中心地址
+#        server-addr: 127.0.0.1:8848    #nacos作为配置中心地址
+        server-addr: 192.168.5.3:8009    #nacos作为配置中心地址 nginx地址
         file-extension: yaml   #指定yaml格式的配置
-
+#        namespace: 4b30badb-1eee-4b33-b9de-4131e1320414   #加载指定命名空间下的配置文件
+#        group: ORDER_GROUP    #加载指定分组下的配置文件
+      #nacos配置中心dataId构成：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      #eg: cloud-order-service-product.yaml
 server:
   port: 7001  #端口号
