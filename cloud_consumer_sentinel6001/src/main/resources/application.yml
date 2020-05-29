@@ -47,6 +47,8 @@ cloud-payment-service:    #服务提供方的服务名
 
 #设置Feign客户端超时时间（openfeign默认支持ribbon）
 feign:
+  sentinel:
+    enabled: true     #配置feign对sentinel的支持
   client:
     config:
       default:

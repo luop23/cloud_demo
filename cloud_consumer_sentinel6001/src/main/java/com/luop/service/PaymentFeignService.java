@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @Date: 2020/5/27 15:08
  * @Description:
  */
-@FeignClient(value = "cloud-payment-service")
+@FeignClient(value = "cloud-payment-service",fallback = FeignFallback.class)   //feign降级
 public interface PaymentFeignService {
 
     @GetMapping(value = "/payment/port")
@@ -17,11 +17,12 @@ public interface PaymentFeignService {
 
     /**
      * openFeign 默认超时时间为1s
+     *
      * @return
      */
     @GetMapping("/payment/timeout")
     CommonResult getFeignTimeout();
 
     @GetMapping("/payment")
-    public CommonResult getAll();
+    CommonResult getAll();
 }
