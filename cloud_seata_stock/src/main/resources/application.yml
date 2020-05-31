@@ -1,0 +1,60 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: cloud-seata-stock
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    #当前数据源操作类型
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/seata_stock?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: 1234
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848   #nacos地址
+    #        server-addr: 192.168.5.3:8009   #nginx地址
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:9527   #配置sentinel dashboard地址  自定义sentinel-dashboard端口
+        port: 8719
+    alibaba:
+      seata:
+        #自定义事务组名称需要与file.conf 中service下seata-server一致
+        tx-service-group: luop_seata
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.luop.entity    #所有entity别名类所在包
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl    #打印日志到控制台
+
+#监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#日志配置
+logging:
+  level:
+    com.alibaba.nacos.client.naming: error    #关闭nacos定时检测
+    com.luop.service: debug   #开启指定包下feign日志
+
+#配置ribbon负载均衡策略
+cloud-payment-service:    #服务提供方的服务名
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule   #随机策略,默认为轮询策略
+
+#设置Feign客户端超时时间（openfeign默认支持ribbon）
+feign:
+  sentinel:
+    enabled: true     #配置feign对sentinel的支持
+  client:
+    config:
+      default:
+        connectTimeout: 5000  #建立连接所用时间，单位毫秒
+        readTimeout: 5000   #建立连接后从服务器读取到可用资源所用的时间，单位毫秒

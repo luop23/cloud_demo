@@ -14,6 +14,9 @@
         <module>cloud_api_commons</module>
         <module>cloud_consumer_order7001</module>
         <module>cloud_consumer_sentinel6001</module>
+        <module>cloud_seata_order</module>
+        <module>cloud_seata_stock</module>
+        <module>cloud_seata_account</module>
     </modules>
 
     <!--统一管理jar包版本-->
