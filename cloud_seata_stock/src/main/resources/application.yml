@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9002
 
 spring:
   application:
@@ -23,10 +23,10 @@ spring:
     alibaba:
       seata:
         #自定义事务组名称需要与file.conf 中service下seata-server一致
-        tx-service-group: luop_seata
+        tx-service-group: luop_tx_group
 
 mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapperxml/*.xml
   type-aliases-package: com.luop.entity    #所有entity别名类所在包
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl    #打印日志到控制台
@@ -45,16 +45,16 @@ logging:
     com.luop.service: debug   #开启指定包下feign日志
 
 #配置ribbon负载均衡策略
-cloud-payment-service:    #服务提供方的服务名
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule   #随机策略,默认为轮询策略
+#cloud-payment-service:    #服务提供方的服务名
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule   #随机策略,默认为轮询策略
 
 #设置Feign客户端超时时间（openfeign默认支持ribbon）
 feign:
   sentinel:
-    enabled: true     #配置feign对sentinel的支持
+    enabled: false     #配置feign对sentinel的支持
   client:
     config:
       default:
-        connectTimeout: 5000  #建立连接所用时间，单位毫秒
-        readTimeout: 5000   #建立连接后从服务器读取到可用资源所用的时间，单位毫秒
+        connectTimeout: 1000  #建立连接所用时间，单位毫秒
+        readTimeout: 1000   #建立连接后从服务器读取到可用资源所用的时间，单位毫秒

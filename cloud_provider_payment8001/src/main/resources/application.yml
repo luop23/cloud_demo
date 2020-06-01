@@ -18,7 +18,7 @@ spring:
 #        server-addr: 192.168.5.3:8009   #nginx地址
 
 mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapperxml/*.xml
   type-aliases-package: com.luop.entity    #所有entity别名类所在包
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl    #打印日志到控制台
