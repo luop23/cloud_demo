@@ -2,13 +2,10 @@ package com.luop.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import io.seata.rm.datasource.DataSourceProxy;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
@@ -17,32 +14,43 @@ import javax.sql.DataSource;
  * @Date: 2020/6/1 10:54
  * @Description: 使用seata对数据源进行代理
  */
-//@Configuration
-//@MapperScan(basePackages = {"com.luop.mapper"})
+@Configuration
 public class DataSourceProxyConfig {
 
-    //从配置文件获取属性构造datasource
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.druid")
     public DataSource druidDataSource() {
         return new DruidDataSource();
     }
 
-    //构造datasource代理对象，替换原来的datasource
-    @Bean("dataSource")
+    //@Primary标识必须配置在代码数据源上，否则本地事务失效
     @Primary
-    public DataSourceProxy dataSourceProxy(DataSource dataSource) {
-        return new DataSourceProxy(dataSource);
+    @Bean("dataSourceProxy")
+    public DataSourceProxy dataSourceProxy(DataSource druidDataSource) {
+        return new DataSourceProxy(druidDataSource);
     }
 
-    @Bean
-    public SqlSessionFactoryBean sqlSessionFactory(DataSourceProxy dataSourceProxy) throws Exception {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources("classpath:/mapperxml/*.xml"));
-        sqlSessionFactoryBean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:/mybatis-config.xml"));
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.luop.entity");
-        sqlSessionFactoryBean.setDataSource(dataSourceProxy);
-        return sqlSessionFactoryBean;
-    }
+    //mybatis配置
+    /*@Bean
+    public SqlSessionFactory sqlSessionFactory(DataSourceProxy dataSourceProxy) throws Exception {
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        factoryBean.setDataSource(dataSourceProxy);
+        factoryBean.setTypeAliasesPackage(typeAliasesPackage);
+        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
+                .getResources(mapperLocations));
+        factoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
+        return factoryBean.getObject();
+    }*/
+
+   /* @Bean
+    @ConfigurationProperties(prefix = "mybatis-plus")
+    public MybatisSqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) throws IOException {
+        // 这里用 MybatisSqlSessionFactoryBean 代替了 SqlSessionFactoryBean，否则 MyBatisPlus 不会生效
+        MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
+        mybatisSqlSessionFactoryBean.setDataSource(dataSource);
+        mybatisSqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
+                .getResources("classpath:mapperxml/*.xml"));
+        return mybatisSqlSessionFactoryBean;
+    }*/
+
 }

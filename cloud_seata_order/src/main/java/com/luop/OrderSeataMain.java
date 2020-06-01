@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @Description:
  */
 @MapperScan("com.luop.mapper")
-@SpringBootApplication(/*exclude = DataSourceAutoConfiguration.class*/)   //取消数据源的自动创建
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})   //取消数据源的自动创建
 @EnableFeignClients
 public class OrderSeataMain {
     public static void main(String[] args) {
