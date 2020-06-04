@@ -17,6 +17,7 @@
         <module>cloud_seata_order</module>
         <module>cloud_seata_stock</module>
         <module>cloud_seata_account</module>
+        <module>rocketMQ_demo</module>
     </modules>
 
     <!--统一管理jar包版本-->
