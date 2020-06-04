@@ -52,6 +52,18 @@ public class ConsumerController {
         return paymentFeignService.getAll();
     }
 
+    /**
+     * 生产上sentinel配置
+     * ①配置MyURLBlockHandler类即可实现流控降级等处理，不用添加@sentinelResource注解
+     * ②
+     * @param id
+     * @return
+     */
+    @GetMapping("/sentinel/{id}")
+    public CommonResult get(@PathVariable Long id){
+        return paymentFeignService.getAll();
+    }
+
     //业务逻辑异常降级处理
     public CommonResult handlerFallback() {
         return new CommonResult(333, "I'm Sorry! 网页丢失了。。。。");
