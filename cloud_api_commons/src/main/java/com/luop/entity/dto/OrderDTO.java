@@ -2,6 +2,7 @@ package com.luop.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
  * @Date: 2020/6/8 15:49
  * @Description:
  */
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
