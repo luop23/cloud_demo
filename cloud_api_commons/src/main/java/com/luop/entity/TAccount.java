@@ -8,19 +8,21 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * @Author: luoping
- * @Date: 2020/6/1 16:17
+ * @Date: 2020/6/8 17:18
  * @Description:
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "t_account")
+@Builder
 @Accessors(chain = true)
 public class TAccount implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
@@ -30,7 +32,7 @@ public class TAccount implements Serializable {
      * 用户id
      */
     @TableField(value = "user_id")
-    private Long userId;
+    private Integer userId;
 
     /**
      * 总额度

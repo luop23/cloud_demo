@@ -9,47 +9,35 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 /**
  * @Author: luoping
- * @Date: 2020/6/8 17:20
+ * @Date: 2020/6/8 17:17
  * @Description:
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "t_stock")
+@TableName(value = "rocketmq_transaction_log")
 @Builder
-@Accessors(chain = true)
-public class TStock implements Serializable {
+public class RocketmqTransactionLog implements Serializable {
+    /**
+     * 主键
+     */
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     /**
-     * 产品id
+     * 事务id
      */
-    @TableField(value = "product_id")
-    private Long productId;
+    @TableField(value = "transaction_id")
+    private String transactionId;
 
     /**
-     * 总库存
+     * 描述
      */
-    @TableField(value = "total")
-    private Integer total;
-
-    /**
-     * 已用库存
-     */
-    @TableField(value = "used")
-    private Integer used;
-
-    /**
-     * 剩余库存
-     */
-    @TableField(value = "residue")
-    private Integer residue;
+    @TableField(value = "description")
+    private String description;
 
     private static final long serialVersionUID = 1L;
-
 }
