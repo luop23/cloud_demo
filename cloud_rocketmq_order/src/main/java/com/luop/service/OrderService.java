@@ -9,10 +9,16 @@ import com.luop.entity.TOrder;
  */
 public interface OrderService {
 
-    //创建订单
-    void createOrder(TOrder order);
+    //发送消息
+    void pushMessage(TOrder order);
+
+    //
+    void saveOrder(TOrder order);
 
     //修改订单
     void editOrder(TOrder order);
+
+    //根据id查询数据
+    TOrder getById(long orderId);
 
 }

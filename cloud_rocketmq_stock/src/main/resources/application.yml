@@ -28,11 +28,12 @@ spring:
         bindings:
           input:
             consumer:
+              broadcasting: true    #开启广播模式
               delayLevelWhenNextConsume: -1   #重试失败直接进入死信队列
       bindings:
         #消费者
         input:
-          destination: orderTopic
+          destination: orderTopic_rocketmq
           content-type: application/json
           group: tx-stock-group
           consumer:

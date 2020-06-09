@@ -24,4 +24,9 @@ public class TransactionLogServiceImpl implements TransactionLogService {
     public void createTransactionLog(RocketmqTransactionLog log) {
         logMapper.insert(log);
     }
+
+    @Override
+    public RocketmqTransactionLog findById(long orderId) {
+        return logMapper.selectById(orderId);
+    }
 }

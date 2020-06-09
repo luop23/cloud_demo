@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TOrder implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 用户id

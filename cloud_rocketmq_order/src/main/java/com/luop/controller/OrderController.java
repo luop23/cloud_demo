@@ -24,7 +24,7 @@ public class OrderController {
 
     @PostMapping
     public CommonResult createOrder(@RequestBody TOrder order) {
-        orderService.createOrder(order);
+        orderService.saveOrder(order);
         return new CommonResult(200, "订单创建成功！");
     }
 

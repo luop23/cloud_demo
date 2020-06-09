@@ -34,7 +34,7 @@ spring:
       bindings:
         #生产者
         output:
-          destination: orderTopic    #topic
+          destination: orderTopic_rocketmq    #topic
           content-type: application/json
 
 mybatis-plus:

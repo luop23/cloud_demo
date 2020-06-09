@@ -11,4 +11,7 @@ public interface TransactionLogService {
 
     //创建事务记录日志
     void createTransactionLog(RocketmqTransactionLog log);
+
+    //根据id查询数据
+    RocketmqTransactionLog findById(long orderId);
 }

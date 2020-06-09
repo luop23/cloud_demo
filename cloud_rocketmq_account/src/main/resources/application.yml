@@ -32,7 +32,7 @@ spring:
       bindings:
         #消费者
         input:
-          destination: orderTopic
+          destination: orderTopic_rocketmq
           content-type: application/json
           group: tx-account-group
           consumer:
