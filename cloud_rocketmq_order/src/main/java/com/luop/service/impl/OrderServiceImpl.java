@@ -1,10 +1,12 @@
 package com.luop.service.impl;
 
 import com.alibaba.nacos.common.util.UuidUtils;
+import com.luop.entity.RocketmqTransactionLog;
 import com.luop.entity.TOrder;
+import com.luop.mapper.RocketmqTransactionLogMapper;
 import com.luop.mapper.TOrderMapper;
 import com.luop.service.OrderService;
-import org.apache.rocketmq.spring.support.RocketMQHeaders;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
@@ -18,29 +20,31 @@ import javax.annotation.Resource;
  * @Description:
  */
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     @Resource
     private TOrderMapper orderMapper;
+
+    @Resource
+    private RocketmqTransactionLogMapper logMapper;
+
     @Resource
     private Source source;
 
     @Override
     public void pushMessage(TOrder order) {
         //发送半消息
-        String uuid = UuidUtils.generateUuid();    //生成唯一id作为事务主键
-        source.output().send(
-                MessageBuilder.withPayload(order)
-                        .setHeader(RocketMQHeaders.TRANSACTION_ID, uuid)
-                        .build()
-        );
+        source.output().send(MessageBuilder.withPayload(order).build());
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveOrder(TOrder order) {
-        orderMapper.insert(order);
-        pushMessage(order);
+        orderMapper.insert(order);   //创建订单
+        String uuid = UuidUtils.generateUuid();    //生成唯一id作为事务主键
+        logMapper.insert(RocketmqTransactionLog.builder().id(order.getId()).transactionId(uuid).description("订单创建完成").build());   //创建事务日志记录
+        log.info("订单创建完成！！！！");
     }
 
     @Override

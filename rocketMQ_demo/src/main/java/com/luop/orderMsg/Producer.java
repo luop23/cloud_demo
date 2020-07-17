@@ -2,8 +2,10 @@ package com.luop.orderMsg;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
+import org.apache.rocketmq.common.message.MessageQueue;
 
 import java.util.List;
 
@@ -24,10 +26,13 @@ public class Producer {
         for (int i = 0; i < orderSteps.size(); i++) {
             OrderStep orderStep = orderSteps.get(i);
             Message message = new Message("order_topic", "order_tag","i_"+i, orderStep.toString().getBytes());
-            SendResult result = producer.send(message, (mqs, msg, arg) -> {
-                int id = (int) arg;
-                int index = id % mqs.size();
-                return mqs.get(index);
+            SendResult result = producer.send(message, new MessageQueueSelector() {
+                @Override
+                public MessageQueue select(List<MessageQueue> mqs, Message msg, Object arg) {
+                    int id = (int) arg;
+                    int index = id % mqs.size();
+                    return mqs.get(index);
+                }
             }, orderStep.getOrderId());
             log.info("发送结果：{}", result);
         }

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisCodeHelperDatasource">
+    <option name="projectProfile">
+      <ProjectProfile>
+        <option name="addSerializeUid" value="true" />
+        <option name="javaMapperPackage" value="com.luop.mapper" />
+        <option name="javaMapperPath" value="E:\cloud_demo\cloud_rocketmq_stock\src\main\java" />
+        <option name="javaModelPackage" value="com.luop.entity" />
+        <option name="javaModelPath" value="E:\cloud_demo\cloud_api_commons\src\main\java" />
+        <option name="lastDatabaseCrudChooseModuleName" value="cloud_consumer_order7001" />
+        <option name="lombokAllArgConstructor" value="true" />
+        <option name="lombokDataAnnotation" value="true" />
+        <option name="lombokNoArgsConstructor" value="true" />
+        <option name="moduleNameToPackageAndPathMap">
+          <map>
+            <entry key="cloud_consumer_order7001">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.luop.mapper" />
+                  <option name="javaMapperPath" value="E:\cloud_demo\cloud_rocketmq_stock\src\main\java" />
+                  <option name="javaModelPacakge" value="com.luop.entity" />
+                  <option name="javaModelPath" value="E:\cloud_demo\cloud_api_commons\src\main\java" />
+                  <option name="xmlPackage" value="mapperxml" />
+                  <option name="xmlPath" value="E:\cloud_demo\cloud_rocketmq_stock\src\main\resources" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+            <entry key="cloud_consumer_sentinel6001">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.luop.mapper" />
+                  <option name="javaMapperPath" value="E:\cloud_demo\cloud_seata_account\src\main\java" />
+                  <option name="javaModelPacakge" value="com.luop.entity" />
+                  <option name="javaModelPath" value="E:\cloud_demo\cloud_api_commons\src\main\java" />
+                  <option name="javaServiceInterfacePackage" value="com.luop.service" />
+                  <option name="javaServiceInterfacePath" value="E:\cloud_demo\cloud_seata_account\src\main\java" />
+                  <option name="javaServicePackage" value="com.luop.service.impl" />
+                  <option name="javaServicePath" value="E:\cloud_demo\cloud_seata_account\src\main\java" />
+                  <option name="xmlPackage" value="mapperxml" />
+                  <option name="xmlPath" value="E:\cloud_demo\cloud_seata_account\src\main\resources" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+            <entry key="cloud_stream_rocketmq_tx_order">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.luop.mapper" />
+                  <option name="javaMapperPath" value="$PROJECT_DIR$/cloud_stream_rocketmq_tx_order/src/main/java" />
+                  <option name="javaModelPacakge" value="com.luop.entity" />
+                  <option name="javaModelPath" value="$PROJECT_DIR$/cloud_stream_rocketmq_tx_order/src/main/java" />
+                  <option name="javaServiceInterfacePackage" value="com.luop.service" />
+                  <option name="javaServiceInterfacePath" value="$PROJECT_DIR$/cloud_stream_rocketmq_tx_order/src/main/java" />
+                  <option name="javaServicePackage" value="com.luop.service.impl" />
+                  <option name="javaServicePath" value="$PROJECT_DIR$/cloud_stream_rocketmq_tx_order/src/main/java" />
+                  <option name="xmlPackage" value="mapperxml" />
+                  <option name="xmlPath" value="$PROJECT_DIR$/cloud_stream_rocketmq_tx_order/src/main/resources" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="mybatisPlusStaticField" value="false" />
+        <option name="tableGenerateConfigs">
+          <map>
+            <entry key="seata_account:t_account">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="TAccount" />
+                  <option name="moduleName" value="cloud_consumer_order7001" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="seata_order:rocketmq_transaction_log">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="RocketmqTransactionLog" />
+                  <option name="moduleName" value="cloud_consumer_order7001" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="seata_order:t_order">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="TOrder" />
+                  <option name="moduleName" value="cloud_consumer_order7001" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="seata_stock:t_stock">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="TStock" />
+                  <option name="moduleName" value="cloud_consumer_order7001" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="userMybatisPlus" value="true" />
+        <option name="xmlMapperPackage" value="mapperxml" />
+        <option name="xmlMapperPath" value="E:\cloud_demo\cloud_rocketmq_stock\src\main\resources" />
+      </ProjectProfile>
+    </option>
+  </component>
+</project>

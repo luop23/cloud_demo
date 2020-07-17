@@ -26,6 +26,7 @@ public class AccountConsumer {
     @StreamListener(Sink.INPUT)
     public void decreaseAccount(TOrder order) {
         log.info("扣减金额开始=================");
+        int i = 1/0;
         TAccount account = accountService.getByUserId(order.getUserId());
         account.setUsed(account.getUsed().add(order.getMoney())).setResidue(account.getResidue().subtract(order.getMoney()));
         accountService.update(account);

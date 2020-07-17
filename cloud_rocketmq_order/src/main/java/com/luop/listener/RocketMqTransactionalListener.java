@@ -3,12 +3,12 @@ package com.luop.listener;
 import com.alibaba.fastjson.JSONObject;
 import com.luop.entity.RocketmqTransactionLog;
 import com.luop.entity.TOrder;
+import com.luop.service.OrderService;
 import com.luop.service.TransactionLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
-import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.springframework.messaging.Message;
 
 import javax.annotation.Resource;
@@ -26,17 +26,20 @@ public class RocketMqTransactionalListener implements RocketMQLocalTransactionLi
     @Resource
     private TransactionLogService logService;
 
+    @Resource
+    private OrderService orderService;
+
     @Override
     public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object arg) {
         log.info("监听消息是否到达消息队列=====================");
-        String uuid = Objects.requireNonNull(msg.getHeaders().get(RocketMQHeaders.TRANSACTION_ID)).toString();    //获取事务id
-        String orderJson = new String((byte[]) msg.getPayload());
-        TOrder order = JSONObject.parseObject(orderJson, TOrder.class);
         try {
-            logService.createTransactionLog(RocketmqTransactionLog.builder().id(order.getId()).transactionId(uuid).description("订单创建完成").build());
+            String orderJson = new String((byte[]) msg.getPayload());
+            TOrder order = JSONObject.parseObject(orderJson, TOrder.class);
+            orderService.saveOrder(order);
+            log.info("本地事务提交成功。");
             return RocketMQLocalTransactionState.COMMIT;     //提交
         } catch (Exception e) {
-            log.error("e={}", e);
+            log.error("本地事务提交失败，e={}", e);
             return RocketMQLocalTransactionState.ROLLBACK;    //回滚
         }
     }

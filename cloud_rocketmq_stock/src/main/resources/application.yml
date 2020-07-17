@@ -37,7 +37,7 @@ spring:
           content-type: application/json
           group: tx-stock-group
           consumer:
-            maxAttempts: 3    #重试次数
+            maxAttempts: 6    #重试次数
 
 mybatis-plus:
   mapper-locations: classpath:mapperxml/*.xml

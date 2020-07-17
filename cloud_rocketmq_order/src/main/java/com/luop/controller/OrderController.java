@@ -24,8 +24,12 @@ public class OrderController {
 
     @PostMapping
     public CommonResult createOrder(@RequestBody TOrder order) {
-        orderService.saveOrder(order);
-        return new CommonResult(200, "订单创建成功！");
+        try {
+            orderService.pushMessage(order);
+            return new CommonResult(200, "订单创建成功！");
+        } catch (Exception e){
+            return new CommonResult(500, "订单创建失败！");
+        }
     }
 
 }

@@ -19,13 +19,13 @@ public class SyncMqProducer {
         mqProducer.setNamesrvAddr("192.168.5.3:9876");
         //启动producer
         mqProducer.start();
-        for (int i = 0; i < 10; i++) {
+//        for (int i = 0; i < 10; i++) {
             //创建消息对象，指定Topic、Tag、消息内容
-            Message message = new Message("Topic_1", "Tag_1", ("Hello RocketMQ sync message-" + i).getBytes());
+            Message message = new Message("Topic_1", "Tag_1", ("Hello RocketMQ sync message-" /*+ i*/).getBytes());
             //发送同步消息
             SendResult result = mqProducer.send(message);
             log.info("Result:{}",result);
-        }
+//        }
         //关闭生产者
         mqProducer.shutdown();
     }
